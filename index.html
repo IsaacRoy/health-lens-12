@@ -1,24 +1,133 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5b7580f9-2d14-4c12-998e-4cca97a8ae13</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>HealthLens - Smart Health Companion</title>
+    <meta name="description" content="Your personal AI-powered health management companion" />
+    <meta name="author" content="HealthLens Team" />
+    <meta name="theme-color" content="#2563eb" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="/lovable-uploads/1e18d88c-c078-42bf-bad2-30cc4d92e30e.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/lovable-uploads/1e18d88c-c078-42bf-bad2-30cc4d92e30e.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/lovable-uploads/1e18d88c-c078-42bf-bad2-30cc4d92e30e.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="HealthLens">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/lovable-uploads/1e18d88c-c078-42bf-bad2-30cc4d92e30e.png" type="image/png">
 
-    <meta property="og:title" content="5b7580f9-2d14-4c12-998e-4cca97a8ae13" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <!-- PWA Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="HealthLens">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="HealthLens - Smart Health Companion" />
+    <meta property="og:description" content="Your personal AI-powered health management companion" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:image" content="/lovable-uploads/1e18d88c-c078-42bf-bad2-30cc4d92e30e.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:image" content="/lovable-uploads/1e18d88c-c078-42bf-bad2-30cc4d92e30e.png" />
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Prevent zooming -->
+    <style>
+      html, body {
+        touch-action: manipulation;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-text-size-adjust: none;
+      }
+    </style>
+    
+    <!-- Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3UXP8RRzxJGap2Ct6rCeKt39LdqA2ITk&libraries=places"></script>
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // PWA install prompt and service worker registration
+      let deferredPrompt;
+      
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+
+      // Handle PWA install prompt
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        // Show install button or banner
+        const installButton = document.createElement('button');
+        installButton.textContent = 'Install HealthLens App';
+        installButton.className = 'fixed bottom-20 left-4 right-4 bg-blue-600 text-white py-3 px-6 rounded-lg shadow-lg z-50 pwa-install-pulse';
+        installButton.onclick = async () => {
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
+            deferredPrompt = null;
+            installButton.remove();
+          }
+        };
+        
+        // Add install button after a delay
+        setTimeout(() => {
+          document.body.appendChild(installButton);
+          
+          // Auto-hide after 10 seconds
+          setTimeout(() => {
+            if (installButton.parentNode) {
+              installButton.remove();
+            }
+          }, 10000);
+        }, 3000);
+      });
+
+      // Handle app installed
+      window.addEventListener('appinstalled', () => {
+        console.log('PWA was installed');
+        deferredPrompt = null;
+      });
+
+      // Prevent pull-to-refresh
+      document.body.addEventListener('touchstart', e => {
+        if (e.touches.length !== 1) { return; }
+        const startY = e.touches[0].clientY;
+        if (startY <= 10 && window.scrollY === 0) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      document.body.addEventListener('touchmove', e => {
+        if (e.touches.length !== 1) { return; }
+        const currentY = e.touches[0].clientY;
+        if (window.scrollY === 0 && currentY > startY) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+    </script>
   </body>
 </html>
