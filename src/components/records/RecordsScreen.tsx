@@ -6,8 +6,10 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Upload, FileText, Image, AlertCircle, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import { UniversalAnalyzer } from '@/components/analysis/UniversalAnalyzer';
 
 export const RecordsScreen = () => {
+  const [currentView, setCurrentView] = useState<'list' | 'analyze-prescription' | 'analyze-lab-report'>('list');
   const [records] = useState([
     {
       id: '1',
@@ -38,13 +40,39 @@ export const RecordsScreen = () => {
     }
   ]);
 
-  const handleUpload = (type: string) => {
-    toast.info(`Opening ${type} upload...`);
+  const handleUpload = (type: 'prescription' | 'lab-report') => {
+    if (type === 'prescription') {
+      setCurrentView('analyze-prescription');
+    } else {
+      setCurrentView('analyze-lab-report');
+    }
   };
 
   const handleAIReview = (recordId: string) => {
     toast.info('Processing with AI...');
   };
+
+  if (currentView === 'analyze-prescription') {
+    return (
+      <div className="flex-1 bg-gray-50 p-4 pb-24">
+        <UniversalAnalyzer 
+          type="prescription" 
+          onBack={() => setCurrentView('list')} 
+        />
+      </div>
+    );
+  }
+
+  if (currentView === 'analyze-lab-report') {
+    return (
+      <div className="flex-1 bg-gray-50 p-4 pb-24">
+        <UniversalAnalyzer 
+          type="lab-report" 
+          onBack={() => setCurrentView('list')} 
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 bg-gray-50">
@@ -61,7 +89,7 @@ export const RecordsScreen = () => {
               onClick={() => handleUpload('prescription')}
             >
               <span className="text-xl">📷</span>
-              <span className="text-sm">Upload Prescription</span>
+              <span className="text-sm">Analyze Prescription</span>
             </Button>
             
             <Button 
@@ -70,7 +98,7 @@ export const RecordsScreen = () => {
               onClick={() => handleUpload('lab-report')}
             >
               <span className="text-xl">📊</span>
-              <span className="text-sm">Upload Lab Report</span>
+              <span className="text-sm">Analyze Lab Report</span>
             </Button>
           </div>
         </div>
