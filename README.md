@@ -1,73 +1,63 @@
-# Welcome to your Lovable project
+# 🩺 HealthLens — Your AI-powered Health Companion
 
-## Project info
+**HealthLens** is a Progressive Web App (PWA) built for the All India Developer’s Hackathon, designed to make healthcare insights accessible and understandable for everyone.
+---
 
-**URL**: https://lovable.dev/projects/c3e3babb-6247-46a6-ba64-df95bb20cf4d
+## What It Does
 
-## How can I edit this code?
+HealthLens helps users:
 
-There are several ways of editing your application.
+-  Understand **lab reports** in simple terms  
+-  Decode **prescriptions** and ongoing **medications**  
+-  Ask **health-related questions** using an AI chatbot  
+-  Locate **nearby doctors and hospitals** in emergencies  
+-  Access **curated health articles**  
+-  Maintain **digital medical records & profiles**  
+- Trigger **emergency help** with location-based services  
 
-**Use Lovable**
+All in one lightweight, mobile-friendly app.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c3e3babb-6247-46a6-ba64-df95bb20cf4d) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## Features
 
-**Use your preferred IDE**
+| Category            | Feature                                                                 |
+|---------------------|-------------------------------------------------------------------------|
+| Lab Insights        | Upload lab reports and get clear, AI-generated explanations              |
+| Prescription Help   | Extract and explain medicine names, dosages, timings                     |
+| AI Chatbot          | Conversational assistant for health FAQs and clarifications              |
+| Emergency Services  | One-tap access to nearby hospitals and emergency contacts                |
+| Health Articles     | Curated, easy-to-read articles on medical and wellness topics            |
+| Profile Management  | Multi-profile support (useful for family, elderly, dependents)           |
+| Digital Records     | Store and retrieve medical records securely                              |
+| Location Services   | Doctor/hospital suggestions based on location                            |
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+##  Tech Stack
 
-Follow these steps:
+| Layer        | Tool / Platform         |
+|--------------|-------------------------|
+| Frontend     | React (PWA)             |
+| Backend      | Express.js (Node.js)    |
+| Database     | Supabase (PostgreSQL)   |
+| AI Services  | OpenAI API (for chatbot, prescription/lab parsing) |
+| Location     | Geolocation + Google Maps API |
+| Deployment   | Netlify        |
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Feasibility & Innovation
 
-# Step 3: Install the necessary dependencies.
-npm i
+- Built as a **Progressive Web App**, ensuring mobile accessibility without install barriers  
+- Uses **AI to simplify** complex medical info, helping underserved segments like elderly and rural users  
+- Plug-and-play design makes it **scalable for clinics, pharmacies, or B2B healthcare** integrations  
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+---
 
-**Edit a file directly in GitHub**
+Team High on Code: Isaac Roy and Abel Abraham
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+--
+## 📜 License
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/c3e3babb-6247-46a6-ba64-df95bb20cf4d) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+MIT License
